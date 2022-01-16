@@ -64,9 +64,10 @@ This option is only recommended for advanced AWS users. Make sure your existing 
 
 In SageMaker console, open  the Juypter Lab notebook server you created in the previous step. In this Juypter Lab instance, there are three Jupyter notebooks for training Mask R-CNN. All three notebooks use [SageMaker TensorFlow Estimator](https://sagemaker.readthedocs.io/en/stable/frameworks/tensorflow/sagemaker.tensorflow.html) in Script Mode, whereby we can keep the SageMaker entry point script outside the Docker container, and pass it as a parameter to SageMaker TensorFlow Estimator. The SageMaker TensorFlow Estimator also allows us to specify the ```distribution``` type, which means we don't have to write code in the entry point script for managing SageMaker distributed training, which greatly simplifies the entry point script. 
 
-The three SageMaker Script Mode notebooks for training Mask R-CNN are listed below:
+The four SageMaker Script Mode notebooks for training Mask R-CNN are listed below:
 
 - Mask R-CNN notebook that uses S3 bucket as data source: [```mask-rcnn-scriptmode-s3.ipynb```](mask-rcnn-scriptmode-s3.ipynb)
+- Mask R-CNN notebook that uses S3 bucket with FastFile mode as data source: [```mask-rcnn-scriptmode-s3-ffm.ipynb```](mask-rcnn-scriptmode-s3.ipynb)
 - Mask R-CNN notebook that uses EFS file-system as data source: [```mask-rcnn-scriptmode-efs.ipynb```](mask-rcnn-scriptmode-efs.ipynb)
 - Mask R-CNN notebook that uses FSx Lustre file-system as data source: [```mask-rcnn-scriptmode-fsx.ipynb```](mask-rcnn-scriptmode-fsx.ipynb)
 
@@ -80,7 +81,12 @@ Below, we compare the three options, [Amazon S3](https://aws.amazon.com/s3/), [A
    </tr>
    <tr>
       <td>Amazon S3</td>
-      <td>Each time the SageMaker training job is launched, it takes approximately 20 minutes to download COCO 2017 dataset from your S3 bucket to the <i>Amazon EBS volume</i> attached to each training instance. During training, data is input to the training data pipeline from the EBS volume attached to each training instance. 
+      <td>Each time the SageMaker training job is launched, it takes approximately 28 minutes to download COCO 2017 dataset from your S3 bucket to the <i>Amazon EBS volume</i> attached to each training instance. During training, data is input to the training data pipeline from the EBS volume attached to each training instance. 
+      </td>
+   </tr>
+   <tr>
+      <td>Amazon S3 FastFile mode</td>
+      <td>Each time the SageMaker training job is launched, it takes approximately 21 minutes to download COCO 2017 dataset from your S3 bucket to the <i>Amazon EBS volume</i> attached to each training instance using FastFile mode. During training, data is input to the training data pipeline from the EBS volume attached to each training instance. 
       </td>
    </tr>
     <tr>
