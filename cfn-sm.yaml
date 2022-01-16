@@ -72,23 +72,6 @@ Parameters:
     Type: String
     Default: '/home/ec2-user/efs'
     ConstraintDescription: Should be a valid local file-system absolute directory path
-  GitHubUsername:
-    Description: GitHub username
-    Type: String
-  GitHubToken:
-    Description: GitHub Token
-    Type: String
-  CodeRepoName:
-    Description: Code Repository name
-    Type: String
-    Default: sagemaker-github-repo
-  GitHubRepoUrl:
-    Description: GitHub Repository Url
-    Type: String
-  GitHubRepoBranch:
-    Description: GitHub Repository branch
-    Type: String
-    Default: 'master'
   NotebookInstanceName:
     Description: SageMaker Notebook instance name
     Type: String
@@ -96,13 +79,12 @@ Parameters:
   S3BucketName:
     Description: SageMaker S3 Bucket Name
     Type: String
+  DefaultCodeRepository:
+    Default: https://github.com/eitansela/distributed_tensorflow_mask_rcnn.git
+    Type: String
 
 Conditions:
   CreateNewFileSystem: !Equals [ !Ref EFSFileSystemId, '']
-  CreateCodeRepo: !Not [!Equals [ !Ref GitHubRepoUrl, ''] ]
-  CreateGitHubRepoSecret: !And 
-    - !Not [ !Equals [!Ref GitHubToken, ''] ]
-    - !Not [ !Equals [!Ref GitHubUsername, ''] ]
 
 Resources:
   Vpc:
@@ -325,36 +307,6 @@ Resources:
       SubnetId: !Ref PrivateSubnet3
       SecurityGroups:
         - !Ref VpcSecurityGroup
-  GitHubRepoSecret:
-    Type: 'AWS::SecretsManager::Secret'
-    Condition: CreateGitHubRepoSecret
-    Properties:
-      Description: GitHub Sign In
-      SecretString: 
-        Fn::Join: 
-          - ''
-          - - '{'
-            - '"username":' 
-            - !Ref GitHubUsername
-            - ','
-            - '"password":'
-            - !Ref GitHubToken
-            - '}'
-      Tags:
-        - Key: Name
-          Value: !Ref 'AWS::StackName'
-  CodeRepo:
-    Type: AWS::SageMaker::CodeRepository
-    Condition: CreateCodeRepo
-    Properties: 
-      CodeRepositoryName: !Ref CodeRepoName
-      GitConfig: 
-        Branch: !Ref GitHubRepoBranch
-        RepositoryUrl: !Ref GitHubRepoUrl
-        SecretArn: !If 
-        - CreateGitHubRepoSecret
-        - !Ref GitHubRepoSecret
-        - !Ref 'AWS::NoValue'
   NotebookStartConfig:
     Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
     Properties: 
@@ -397,11 +349,8 @@ Resources:
         - !GetAtt VpcSecurityGroup.GroupId
       SubnetId: !Ref PrivateSubnet1
       DirectInternetAccess: Disabled
-      AdditionalCodeRepositories: !If 
-        - CreateCodeRepo
-        - [!GetAtt CodeRepo.CodeRepositoryName]
-        - !Ref 'AWS::NoValue'
       LifecycleConfigName: !GetAtt NotebookStartConfig.NotebookInstanceLifecycleConfigName
+      DefaultCodeRepository: !Ref DefaultCodeRepository
       VolumeSizeInGB: !Ref EbsVolumeSize
       Tags:
         - Key: Name
