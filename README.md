@@ -1,4 +1,5 @@
 # Distributed TensorFlow training using Amazon SageMaker
+Comparing Amazon S3, Amazon S3 FastFile mode, Amazon EFS, and Amazon FSx Lustre.
 
 ## Prerequisites
 1. [Create and activate an AWS Account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
