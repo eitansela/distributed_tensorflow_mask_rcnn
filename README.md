@@ -1,5 +1,10 @@
 # Distributed TensorFlow training using Amazon SageMaker
-Comparing Amazon S3, Amazon S3 FastFile mode, Amazon EFS, and Amazon FSx Lustre.
+Comparing Amazon S3, Amazon S3 FastFile mode, Amazon EFS, and Amazon FSx for Lustre.
+
+- [Amazon S3](https://aws.amazon.com/s3/)
+- [FastFile mode](https://aws.amazon.com/about-aws/whats-new/2021/10/amazon-sagemaker-fast-file-mode/)
+- [Amazon EFS](https://aws.amazon.com/efs/)
+- [Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/)
 
 ## Prerequisites
 1. [Create and activate an AWS Account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
