@@ -67,7 +67,7 @@ In SageMaker console, open  the Juypter Lab notebook server you created in the p
 The four SageMaker Script Mode notebooks for training Mask R-CNN are listed below:
 
 - Mask R-CNN notebook that uses S3 bucket as data source: [```mask-rcnn-scriptmode-s3.ipynb```](mask-rcnn-scriptmode-s3.ipynb)
-- Mask R-CNN notebook that uses S3 bucket with FastFile mode as data source: [```mask-rcnn-scriptmode-s3-ffm.ipynb```](mask-rcnn-scriptmode-s3.ipynb)
+- Mask R-CNN notebook that uses S3 bucket with FastFile mode as data source: [```mask-rcnn-scriptmode-s3-ffm.ipynb```](mask-rcnn-scriptmode-s3-ffm.ipynb)
 - Mask R-CNN notebook that uses EFS file-system as data source: [```mask-rcnn-scriptmode-efs.ipynb```](mask-rcnn-scriptmode-efs.ipynb)
 - Mask R-CNN notebook that uses FSx Lustre file-system as data source: [```mask-rcnn-scriptmode-fsx.ipynb```](mask-rcnn-scriptmode-fsx.ipynb)
 
