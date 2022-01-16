@@ -1,0 +1,2 @@
+# distributed_tensorflow_mask_rcnn
+Distributed TensorFlow training using Amazon SageMaker
