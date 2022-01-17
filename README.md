@@ -92,7 +92,7 @@ Below, we compare the three options, [Amazon S3](https://aws.amazon.com/s3/), [A
    </tr>
    <tr>
       <td>Amazon S3 FastFile mode</td>
-      <td>Each time the SageMaker training job is launched, it takes approximately 21 minutes to download COCO 2017 dataset from your S3 bucket to the <i>Amazon EBS volume</i> attached to each training instance using FastFile mode. During training, data is input to the training data pipeline from the EBS volume attached to each training instance. 
+      <td>Each time the SageMaker training job is launched, it takes approximately 7 minutes to download COCO 2017 dataset from your S3 bucket to the <i>Amazon EBS volume</i> attached to each training instance using FastFile mode. During training, data is input to the training data pipeline from the EBS volume attached to each training instance. 
       </td>
    </tr>
     <tr>
